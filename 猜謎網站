@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>謎題挑戰</title>
+    <style>
+        /* CSS 樣式：讓網頁更好看 (與上次保持一致，確保視覺效果) */
+        body {
+            font-family: '微軟正黑體', Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 650px;
+        }
+
+        h1 {
+            color: #ff6f00;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #ffcc80;
+            padding-bottom: 10px;
+        }
+
+        .quiz-item {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 2px solid #b3e5fc;
+            border-radius: 12px;
+            background-color: #e1f5fe;
+        }
+
+        .quiz-item label {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #01579b;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px; 
+            align-items: center;
+        }
+
+        .input-group input[type="text"] {
+            flex-grow: 1; 
+            padding: 12px;
+            border: 1px solid #4fc3f7;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1.1em;
+        }
+
+        .check-button {
+            padding: 12px 20px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap; 
+        }
+
+        .check-button:hover {
+            background-color: #f57c00;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.4em;
+            font-weight: bold;
+            text-align: center;
+            min-height: 50px; 
+            transition: all 0.5s ease;
+        }
+
+        /* 答對和答錯的特定樣式 */
+        .correct {
+            background-color: #e8f5e9;
+            color: #388e3c;
+            border: 2px solid #66bb6a;
+        }
+
+        .incorrect {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 2px solid #e57373;
+        }
+
+        .emoji-big {
+            font-size: 1.5em; 
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>謎題挑戰</h1>
+        <p>請回答以下兩道謎題，並檢查答案：</p>
+
+        <div class="quiz-item">
+            <label for="q1-input">Q1. 脫了紅袍子，是個白胖子；去了白胖子，是顆黑丸子。</label>
+            <div class="input-group">
+                <input type="text" id="q1-input" placeholder="請輸入答案">
+                <button class="check-button" onclick="checkAnswer('q1')">檢查 Q1</button>
+            </div>
+            <div id="q1-result" class="result">
+                </div>
+        </div>
+
+        <div class="quiz-item">
+            <label for="q2-input">Q2. 什麼東西越洗越髒，不洗反而乾淨？</label>
+            <div class="input-group">
+                <input type="text" id="q2-input" placeholder="請輸入答案">
+                <button class="check-button" onclick="checkAnswer('q2')">檢查 Q2</button>
+            </div>
+            <div id="q2-result" class="result">
+                </div>
+        </div>
+        
+    </div>
+
+    <script>
+        // 定義正確答案 (Q1 已更新為「荔枝」)
+        const correctAnswers = {
+            q1: "荔枝", 
+            q2: "水" 
+        };
+
+        /**
+         * 檢查單一謎題的答案
+         * @param {string} questionId - 謎題的 ID，例如 'q1' 或 'q2'
+         */
+        function checkAnswer(questionId) {
+            // 1. 取得使用者輸入的值並進行清理 (去除空格、轉換成小寫)
+            const inputElement = document.getElementById(`${questionId}-input`);
+            // 特殊處理中文全形和半形空格問題
+            const userAnswer = inputElement.value.trim().replace(/　/g, '').toLowerCase();
+
+            // 2. 取得正確答案
+            const correctAnswer = correctAnswers[questionId].toLowerCase();
+            
+            // 3. 取得結果顯示的元素
+            const resultDiv = document.getElementById(`${questionId}-result`);
+
+            let message = "";
+            let emoji = "";
+            let className = "";
+
+            // 4. 判斷答案是否正確
+            if (userAnswer === correctAnswer) {
+                // 答對了：笑臉 + 你超棒
+                emoji = "😁";
+                message = "你超棒";
+                className = "correct";
+            } else {
+                // 答錯了：生氣臉 + 你好笨
+                emoji = "😡";
+                message = "你好笨";
+                className = "incorrect";
+            }
+            
+            // 5. 更新結果顯示區域的內容和樣式
+            resultDiv.className = `result ${className}`;
+            resultDiv.innerHTML = `<span class="emoji-big">${emoji}</span> ${message}`;
+        }
+    </script>
+
+</body>
+</html>
