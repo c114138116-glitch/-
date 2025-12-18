@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>穆丞翎 | 學生個人履歷表</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS 樣式：定義履歷表的視覺風格 */
+        :root {
+            /* 淡色系配色方案 */
+            --primary-color: #5d5d7c; /* 柔和灰藍 (主文字色) */
+            --secondary-color: #83c5be; /* 淡青色 (強調色，柔和專業) */
+            --light-bg-main: #fcfcfc; /* 主體白色 */
+            --light-bg-sec: #f7f9fb; /* 淺灰色 (區塊背景) */
+            --border-color: #e0e0e0; /* 邊框線條色 */
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: '微軟正黑體', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg-sec);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .resume-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            display: flex;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* 柔和陰影 */
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+
+        /* --- 左側欄樣式 (特質) --- */
+        .left-column {
+            flex: 1; 
+            background-color: var(--light-bg-sec); /* 淺背景色 */
+            color: var(--primary-color);
+            padding: 40px 30px;
+            text-align: center;
+            display: flex; 
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .name-title {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .name-title h2 {
+            font-size: 2.8em; /* 姓名加大 */
+            margin: 0;
+            padding-bottom: 5px;
+            color: #333;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .name-title p {
+            font-size: 1.2em;
+            margin: 8px 0 0 0;
+            color: #777;
+        }
+
+        .section-left {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .section-left h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        /* 特質標籤樣式 */
+        .trait-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .trait-list li {
+            background-color: #f0f4f7; /* 更淡的背景 */
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.2s;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .trait-list li:hover {
+            background-color: #e6f1f4; /* 懸停時略微變深 */
+        }
+        
+        /* 刪除左側欄的聯繫資訊樣式 */
+        /* .contact-info, .contact-info p, .contact-info i 被移到右側欄底部 */
+
+        /* --- 右側欄樣式 (經歷 / 學歷 / 聯繫資訊) --- */
+        .right-column {
+            flex: 2; 
+            background-color: var(--light-bg-main);
+            padding: 40px 50px;
+        }
+        
+        .section-right {
+            margin-bottom: 40px;
+        }
+        
+        /* 聯繫資訊區塊 (新位置) */
+        .contact-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .contact-footer h3 {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .contact-footer p {
+            margin: 8px 0;
+            font-size: 1em;
+            color: #5d5d7c;
+        }
+        
+        .contact-footer i {
+            width: 25px;
+            text-align: center;
+            color: var(--secondary-color);
+            margin-right: 5px;
+        }
+        /* 聯繫資訊新樣式結束 */
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 25px;
+        }
+
+        .entry {
+            border-left: 3px solid var(--border-color);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .entry:before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            border: 2px solid var(--light-bg-main);
+        }
+
+        .entry h4 {
+            color: var(--primary-color);
+            margin: 0 0 5px 0;
+            font-size: 1.1em;
+        }
+        
+        .entry h5 {
+            color: #7f8c8d;
+            margin: 0 0 10px 0;
+            font-size: 0.9em;
+            font-weight: normal;
+        }
+
+        .entry ul {
+            padding-left: 20px;
+            margin: 5px 0 0 0;
+            list-style: none; 
+        }
+
+        .entry ul li {
+            line-height: 1.6;
+        }
+        
+        .entry ul li:before {
+            content: '✓'; 
+            color: var(--secondary-color);
+            font-weight: bold;
+            display: inline-block; 
+            width: 1.5em; 
+            margin-left: -1.5em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="resume-container">
+        <div class="left-column">
+            
+            <div class="name-title">
+                <h2>穆丞翎</h2>
+                <p>國立高雄科技大學 | 金融系技優專班</p>
+            </div>
+            
+            <div class="section-left trait-info">
+                <h3><i class="fas fa-seedling"></i> 個人特質與優勢</h3>
+                <ul class="trait-list">
+                    <li>認真負責</li>
+                    <li>勇於挑戰</li>
+                    <li>自律學習</li>
+                    <li>邏輯清晰</li>
+                    <li>團隊合作</li>
+                    <li>積極主動</li>
+                </ul>
+            </div>
+            
+            </div>
+
+        <div class="right-column">
+
+            <div class="section-right">
+                <h2 class="section-title"><i class="fas fa-book-reader"></i> 教育背景</h2>
+                
+                <div class="entry">
+                    <h4>國立高雄科技大學 (高科大) | 金融系技優專班</h4>
+                    
+                </div>
+
+                <div class="entry">
+                    <h4>高雄市立鳳山商工 | 商業經營科 </h4>
+                    
+                    <ul>
+                        <li>獲得電腦軟體應用乙級證照。</li>
+                        <li>在校期間表現優異。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-right">
+                <h2 class="section-title"><i class="fas fa-puzzle-piece"></i> 社團參與與服務</h2>
+                
+                <div class="entry">
+                    <h4>烘焙社社員</h4>
+                    
+                </div>
+
+                <div class="entry">
+                    <h4>桌球社社員</h4>
+                    
+                </div>
+            </div>
+            
+            <div class="contact-footer">
+                <h3><i class="fas fa-paper-plane"></i> 聯繫資訊</h3>
+                <p><i class="fas fa-envelope"></i> C114138116@nkust.edu.tw</p>
+                <p><i class="fas fa-phone"></i> 09XX-XXX-XXX</p>
+                <p><i class="fas fa-map-marker-alt"></i> 高雄市</p>
+            </div>
+            </div>
+    </div>
+
+</body>
+</html>
